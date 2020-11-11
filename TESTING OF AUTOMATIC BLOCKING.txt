@@ -1,0 +1,87 @@
+"C:\Program Files\Java\jdk-14.0.2\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.2\lib\idea_rt.jar=63371:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.2\bin" -Dfile.encoding=UTF-8 -classpath C:\Users\Adithya\IdeaProjects\ATM\out\production\ATM com.company.Main
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
+1
+    enter your account number
+12345
+     enter your pin
+4567
+your entered pin is wrong please check again
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
+1
+    enter your account number
+12345
+     enter your pin
+98546
+your entered pin is wrong please check again
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
+1
+    enter your account number
+12345
+     enter your pin
+857
+** you have entered wrong password 3 times so your account is blocked **
+** contact admin to unblock **
+your entered pin is wrong please check again
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
+1
+    enter your account number
+12345
+*** your account is blocked contact admin to continue services ***
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
+2
+enter your admin id
+19019
+enter your password
+99999
+    press 1 to check atm balance
+    press 2 to check no of transactions done today
+    press 3 to reset all transactions
+    press 4 to deposit in atm
+    press 5 to block/unblock account
+5
+   enter the account no u want to take action
+12345
+*** this account is currently blocked ***
+*** press 1 to unblock ***
+1
+*** you have successfully unblocked account ***
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
+1
+    enter your account number
+12345
+     enter your pin
+98760
+    enter your 2 step verification code sent to your mobile
+*** your 4 digit verification code is 7118 ***
+7118
+    press 1 to select withdraw
+    press 2 to select ministatement
+    press 3 to select balance enquiry
+     press 4 to deposit money
+     press 5 to transfer money from your account
+     press 6 to change pin
+     press 7 to block your account
+3
+**** after all transactions your balance is50000 ****
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin

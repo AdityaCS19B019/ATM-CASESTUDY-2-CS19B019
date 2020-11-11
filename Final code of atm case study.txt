@@ -1,0 +1,342 @@
+package com.company;
+
+import java.util.Random;
+import java.util.Scanner;
+class Customer
+{
+    int p,flag,a,check,wtdrw,counttmsofwdrw=0,depo,countofdep=0,trfer,nwpin,accou;
+    private int acc[]={12345,12346,12347,12348,12349,12350,12351,12352,12353,12354};
+    //the above assigns the account numbers
+    private int pin[]={98760,98759,98758,98757,98756,98755,98754,98753,98752,98751};
+    //the above assigns the passwors for corresponding account numbers
+    private int bal[]={50000,56000,85450,65400,98700,120500,359000,45000,58900,25000};
+    //this is the initial balance of corresponding account numbers
+    private int noofdep[]={0,0,0,0,0,0,0,0,0,0};
+    private int noofwdrw[]={0,0,0,0,0,0,0,0,0,0};
+    private int block[]={0,0,0,0,0,0,0,0,0,0};
+    private int nooftmswrpswd[]={0,0,0,0,0,0,0,0,0,0};
+    public int checkacc(int a)
+    {
+        this.a=a;
+        for(int j=0;j<10;j++)
+        {
+            if(acc[j]==a)
+            {     flag=1;
+                  check=j;
+                  break;
+            }
+            else
+                flag=0;
+        }
+        return flag;
+    }
+    public int checkpin(int p)
+    {
+        this.p=p;
+        if(p==pin[check])
+        {
+            nooftmswrpswd[check]=0;
+            return 1;
+        }
+        else
+            {
+                nooftmswrpswd[check]++;
+                if(nooftmswrpswd[check]>=3)
+                {
+                    block[check]=1;
+                    System.out.println("** you have entered wrong password 3 times so your account is blocked **");
+                    System.out.println("** contact admin to unblock **");
+                }
+                return 0;
+            }
+
+    }
+    public void withdraw(int wtdrw)
+    {
+        this.wtdrw=wtdrw;
+        if(bal[check]>=wtdrw)
+        {
+            bal[check] = bal[check] - wtdrw;
+            System.out.println("*** money withdrawed successfully ***");
+            noofwdrw[check]++;
+            counttmsofwdrw++;
+        }
+        else
+            System.out.println("*** money in your account is not sufficient to withdraw ***");
+    }
+    public void minstatement()
+    {
+        System.out.println("**** you had withdrawed"+ noofwdrw[check]+ " no of times ****");
+        System.out.println("**** you had deposited money "+ noofdep[check]+ " times ****");
+        System.out.println("**** your final balance is "+bal[check]+" ****");
+    }
+    public void balenqry()
+    {
+        System.out.println("**** after all transactions your balance is"+ bal[check]+" ****");
+    }
+    public void deposit(int depo)
+    {
+        this.depo=depo;
+        bal[check]=bal[check]+depo;
+        System.out.println("**** you have deposited Rs"+ depo+"successfully ****");
+        noofdep[check]++;
+        countofdep++;
+    }
+    public void nooftra()
+    {
+        System.out.println("*** total no of deposits up to now are "+countofdep+" ***");
+        System.out.println("*** total no of withdraws up to now are "+counttmsofwdrw+" ***");
+    }
+    public void reset()
+    {
+        counttmsofwdrw=0;
+        countofdep=0;
+        System.out.println("*** all transactions are resetted now ***");
+    }
+    public void chgpin(int nwpin)
+    {
+        this.nwpin=nwpin;
+        pin[check]=nwpin;
+        System.out.println("*** you have changed your pin successfully");
+    }
+    public void block()
+    {
+       block[check]=1;
+        System.out.println("*** you have blocked your account successfully ***");
+    }
+    public void unblock()
+    {
+      block[check]=0;
+      nooftmswrpswd[check]=0;
+        System.out.println("*** you have successfully unblocked account ***");
+    }
+    public int isblock()
+    {
+        return block[check];
+    }
+
+}
+class Admin
+{
+    private int atmbal=1000000;
+    int amwdrw,atmdep;
+    public int issufftowdrw(int amwdrw)
+    {
+        this.amwdrw=amwdrw;
+        if(amwdrw<=atmbal)
+        {
+            atmbal=atmbal-amwdrw;
+            return 1;
+        }
+        else
+            return 0;
+    }
+    public void depinatm(int atmdep)
+    {
+        this.atmdep=atmdep;
+        atmbal=atmbal+atmdep;
+    }
+    public void showatmbal()
+    {
+        System.out.println("*** the ramaining balance in atm right now is "+atmbal+" ***");
+    }
+
+
+}
+class Twostepver
+{
+    private int otp,cotp;
+    public void getotp()
+    {
+        Random r=new Random();
+        otp=1000+r.nextInt(9000);
+        System.out.println("*** your 4 digit verification code is "+otp+" ***");
+    }
+    public int checkotp(int cotp)
+    {
+        this.cotp=cotp;
+        if(cotp==otp)
+            return 1;
+        else
+            return 0;
+    }
+}
+public class Main {
+
+    public static void main(String[] args)
+    {
+        Scanner scan=new Scanner(System.in);
+        Customer c=new Customer();
+        Admin a=new Admin();
+        Twostepver t=new Twostepver();
+	     int i=1;
+	     while(i>0)
+         {
+             System.out.println("-------------------------------------------------------------------------------");
+             System.out.println("    welcome");
+             System.out.println("    press 1 if u are a customer");
+             System.out.println("    press 2 if u are admin");
+             int re=scan.nextInt();
+               if(re==1)
+               {
+                       System.out.println("    enter your account number");
+                       int acc1 = scan.nextInt();
+                       if (c.checkacc(acc1) == 1)
+                       {
+                           if(c.isblock()==0) {
+                               System.out.println("     enter your pin");
+                               int pin1 = scan.nextInt();
+                               if (c.checkpin(pin1) == 1) {
+                                   System.out.println("    enter your 2 step verification code sent to your mobile");
+                                   t.getotp();
+                                   int newotp=scan.nextInt();
+                                   if (t.checkotp(newotp)==1) {
+                                       System.out.println("    press 1 to select withdraw");
+                                       System.out.println("    press 2 to select ministatement");
+                                       System.out.println("    press 3 to select balance enquiry");
+                                       System.out.println("     press 4 to deposit money");
+                                       System.out.println("     press 5 to transfer money from your account");
+                                       System.out.println("     press 6 to change pin");
+                                       System.out.println("     press 7 to block your account");
+                                       int re1 = scan.nextInt();
+                                       if (re1 == 1)
+                                       {
+                                           System.out.println("    enter the amount u want to withdraw");
+                                           int wtd = scan.nextInt();
+                                           if (a.issufftowdrw(wtd) == 1)
+                                           {
+                                               c.withdraw(wtd);
+                                           } else
+                                               System.out.println("*** money is not sufficient in atm ***");
+                                       }
+                                       if (re1 == 2)
+                                       {
+                                           c.minstatement();
+                                       }
+                                       if (re1 == 3)
+                                       {
+                                           c.balenqry();
+                                       }
+                                       if (re1 == 4)
+                                       {
+                                           System.out.println("enter the amount you want to deposit");
+                                           int dep = scan.nextInt();
+                                           c.deposit(dep);
+                                           a.depinatm(dep);
+                                       }
+                                       if (re1 == 5)
+                                       {
+                                           System.out.println("enter the money u want to deposit");
+                                           int mny = scan.nextInt();
+                                           c.withdraw(mny);
+                                           System.out.println("enter the account no in which u want to deposit");
+                                           int acn = scan.nextInt();
+                                           if (c.checkacc(acn) == 1)
+                                           {
+                                               c.deposit(mny);
+                                           }
+                                           else
+                                               {
+                                               System.out.println("**** sorry we cant find the entered account ****");
+                                               c.deposit(mny);
+                                           }
+                                       }
+                                       if (re1 == 6) {
+                                           System.out.println("enter the new 5 digit pin");
+                                           int npn = scan.nextInt();
+                                           if (npn / 10000 < 10 && npn / 10000 > 0)
+                                           {
+                                               c.chgpin(npn);
+                                           }
+                                           else
+                                               {
+                                               System.out.println("*** you didnt entered 5 digit pin ***");
+                                               System.out.println("*** please enter again from starting");
+                                           }
+                                       }
+                                       if (re1 == 7)
+                                       {
+                                           c.block();
+                                       }
+                                   }
+                                   else
+                                       System.out.println("*** entered verification code is wrong ***\n *** check again ***");
+                               }
+                               else {
+                                   System.out.println("your entered pin is wrong please check again");
+                               }
+                           }
+                           else
+                               System.out.println("*** your account is blocked contact admin to continue services ***");
+                       }
+                       else
+                           {
+                           System.out.println("sorry your credentials are not found plese check again");
+                       }
+
+
+               }
+               if(re==2)
+               {
+                   System.out.println("enter your admin id");
+                   if(scan.nextInt()==19019)
+                   {
+                       System.out.println("enter your password");
+                       if(scan.nextInt()==99999)
+                       {
+                           System.out.println("    press 1 to check atm balance");
+                           System.out.println("    press 2 to check no of transactions done today");
+                           System.out.println("    press 3 to reset all transactions");
+                           System.out.println("    press 4 to deposit in atm");
+                           System.out.println("    press 5 to block/unblock account");
+                           int k=scan.nextInt();
+                           if(k==1)
+                           {a.showatmbal();}
+                           if(k==2)
+                           {c.nooftra();}
+                           if(k==3)
+                           {c.reset();}
+                           if(k==4)
+                           {
+                               System.out.println("    enter the money deposited");
+                               int depos=scan.nextInt();
+                               a.depinatm(depos);
+                           }
+                           if(k==5)
+                           {
+                               System.out.println("   enter the account no u want to take action");
+                               int acno=scan.nextInt();
+                               if(c.checkacc(acno)==1)
+                               {
+                                   if(c.isblock()==1)
+                                   {
+                                       System.out.println("*** this account is currently blocked ***");
+                                       System.out.println("*** press 1 to unblock ***");
+                                       if(scan.nextInt()==1)
+                                           c.unblock();
+                                       else
+                                           System.out.println("*** sorry we kept it as blocked ***");
+                                   }
+                                   else
+                                   {
+                                       System.out.println("*** your account is currently active ***");
+                                       System.out.println("*** press 1 to block ***");
+                                       if(scan.nextInt()==1)
+                                           c.block();
+                                       else
+                                           System.out.println("*** sorry we still kept your account as active ***");
+                                   }
+                               }
+                           }
+                       }
+                       else
+                           System.out.println("****wrong password\n****this incident will bw reported");
+                   }
+                   else
+                       System.out.println("****  sorry wrong id \n*****this incident will be reported");
+               }
+
+         }
+    }
+}
+

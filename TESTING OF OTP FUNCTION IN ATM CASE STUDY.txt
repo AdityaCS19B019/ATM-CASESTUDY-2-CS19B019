@@ -1,0 +1,40 @@
+"C:\Program Files\Java\jdk-14.0.2\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.2\lib\idea_rt.jar=53390:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.2\bin" -Dfile.encoding=UTF-8 -classpath C:\Users\Adithya\IdeaProjects\ATM\out\production\ATM com.company.Main
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
+1
+    enter your account number
+12345
+     enter your pin
+98760
+    enter your 2 step verification code sent to your mobile
+*** your 4 digit verification code is 6604 ***
+6605
+*** entered verification code is wrong ***
+ *** check again ***
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
+1
+    enter your account number
+12345
+     enter your pin
+98760
+    enter your 2 step verification code sent to your mobile
+*** your 4 digit verification code is 1829 ***
+1829
+    press 1 to select withdraw
+    press 2 to select ministatement
+    press 3 to select balance enquiry
+     press 4 to deposit money
+     press 5 to transfer money from your account
+     press 6 to change pin
+     press 7 to block your account
+3
+**** after all transactions your balance is50000 ****
+-------------------------------------------------------------------------------
+    welcome
+    press 1 if u are a customer
+    press 2 if u are admin
